@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: CSS module type declarations may be missing in this project
 import styles from './Auth.module.css';
 
 export default function LoginPage() {

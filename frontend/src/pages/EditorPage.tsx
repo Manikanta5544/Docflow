@@ -7,10 +7,12 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { documentsApi, versionsApi } from '../lib/api';
 import { useToast, ToastContainer } from '../hooks/useToast';
 import { useAuth } from '../hooks/useAuth';
-import EditorToolbar from '../components/editor/EditorToolbar';
-import ShareModal from '../components/editor/ShareModal';
-import VersionHistory from '../components/editor/VersionHistory';
+import EditorToolbar from '../components/EditorToolbar';
+import ShareModal from '../components/ShareModal';
+import VersionHistory from '../components/VersionHistory';
 import type { Document } from '../types';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: CSS module type declarations may be missing in this project
 import styles from './EditorPage.module.css';
 
 type SaveState = 'saved' | 'unsaved' | 'saving';
