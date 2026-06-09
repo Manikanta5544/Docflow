@@ -3,7 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, documents, sharing, versions, upload
 from app.database import engine, Base
 
-Base.metadata.create_all(bind=engine)
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="DocFlow API", version="1.0.0")
 
