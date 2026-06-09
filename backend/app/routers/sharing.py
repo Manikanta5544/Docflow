@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from typing import List
 from app.database import get_db
 from app import models, schemas
@@ -20,21 +21,36 @@ def share_document(
         models.Document.id == doc_id,
         models.Document.owner_id == current_user.id,
     ).first()
+
     if not doc:
-        raise HTTPException(status_code=404, detail="Document not found or you are not the owner")
+        raise HTTPException(
+            status_code=404,
+            detail="Document not found or you are not the owner",
+        )
 
     # Find target user
-    target = db.query(models.User).filter(models.User.email == share_in.email).first()
+    target = db.query(models.User).filter(
+        models.User.email == share_in.email
+    ).first()
+
     if not target:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(
+            status_code=404,
+            detail="User not found",
+        )
+
     if target.id == current_user.id:
-        raise HTTPException(status_code=400, detail="Cannot share a document with yourself")
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot share a document with yourself",
+        )
 
     # Check if already shared
     existing = db.query(models.DocumentAccess).filter(
         models.DocumentAccess.document_id == doc_id,
         models.DocumentAccess.user_id == target.id,
     ).first()
+
     if existing:
         # Update role if already exists
         existing.role = share_in.role
@@ -47,10 +63,20 @@ def share_document(
         user_id=target.id,
         role=share_in.role,
     )
-    db.add(access)
-    db.commit()
-    db.refresh(access)
-    return access
+
+    try:
+        db.add(access)
+        db.commit()
+        db.refresh(access)
+        return access
+
+    except IntegrityError:
+        db.rollback()
+
+        raise HTTPException(
+            status_code=400,
+            detail="User already has access to this document",
+        )
 
 
 @router.get("/{doc_id}/access", response_model=List[schemas.AccessOut])
@@ -63,8 +89,12 @@ def list_access(
         models.Document.id == doc_id,
         models.Document.owner_id == current_user.id,
     ).first()
+
     if not doc:
-        raise HTTPException(status_code=404, detail="Document not found or not owner")
+        raise HTTPException(
+            status_code=404,
+            detail="Document not found or not owner",
+        )
 
     return db.query(models.DocumentAccess).filter(
         models.DocumentAccess.document_id == doc_id
@@ -82,15 +112,23 @@ def revoke_access(
         models.Document.id == doc_id,
         models.Document.owner_id == current_user.id,
     ).first()
+
     if not doc:
-        raise HTTPException(status_code=404, detail="Document not found or not owner")
+        raise HTTPException(
+            status_code=404,
+            detail="Document not found or not owner",
+        )
 
     access = db.query(models.DocumentAccess).filter(
         models.DocumentAccess.id == access_id,
         models.DocumentAccess.document_id == doc_id,
     ).first()
+
     if not access:
-        raise HTTPException(status_code=404, detail="Access record not found")
+        raise HTTPException(
+            status_code=404,
+            detail="Access record not found",
+        )
 
     db.delete(access)
     db.commit()
