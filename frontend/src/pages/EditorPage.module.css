@@ -1,0 +1,270 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.loadingState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 56px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.headerLeft, .headerRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  transition: background 0.15s, color 0.15s;
+}
+.backBtn:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.title {
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  max-width: 340px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.title.editable {
+  cursor: text;
+  border-radius: 4px;
+  padding: 3px 6px;
+  transition: background 0.15s;
+}
+.title.editable:hover { background: var(--bg-hover); }
+
+.titleInput {
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  max-width: 340px;
+  font-family: var(--font-sans);
+  outline: none;
+}
+
+.saveIndicator {
+  font-size: 0.775rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+.saved {
+  color: var(--success);
+  background: var(--success-muted);
+}
+.saving {
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+}
+.unsaved {
+  color: var(--warning);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.readonlyBadge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.versionBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  color: var(--text-secondary);
+  font-size: 0.825rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.versionBtn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.saveVersionBtn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  color: var(--text-secondary);
+  font-size: 0.825rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.saveVersionBtn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.shareBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  color: white;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.shareBtn:hover { background: var(--accent-hover); }
+
+.userBadge {
+  width: 30px;
+  height: 30px;
+  background: var(--accent-muted);
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: default;
+}
+
+.editorArea {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.editorWrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 48px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.editorContent {
+  width: 100%;
+  max-width: 720px;
+}
+
+/* Tiptap editor styles */
+.editorContent :global(.ProseMirror) {
+  min-height: 400px;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.75;
+  font-family: var(--font-sans);
+  caret-color: var(--accent);
+}
+
+.editorContent :global(.ProseMirror h1) {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  margin-top: 1.2em;
+}
+.editorContent :global(.ProseMirror h2) {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 0.4em;
+  margin-top: 1em;
+}
+.editorContent :global(.ProseMirror h3) {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 0.3em;
+  margin-top: 0.9em;
+}
+
+.editorContent :global(.ProseMirror p) {
+  color: var(--text-primary);
+  margin-bottom: 0.5em;
+}
+
+.editorContent :global(.ProseMirror strong) { font-weight: 700; }
+.editorContent :global(.ProseMirror em) { font-style: italic; color: var(--text-secondary); }
+.editorContent :global(.ProseMirror u) { text-decoration: underline; text-underline-offset: 3px; }
+
+.editorContent :global(.ProseMirror ul),
+.editorContent :global(.ProseMirror ol) {
+  padding-left: 1.5em;
+  margin-bottom: 0.75em;
+}
+.editorContent :global(.ProseMirror li) {
+  margin-bottom: 0.25em;
+  color: var(--text-primary);
+}
+
+.editorContent :global(.ProseMirror .is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--text-muted);
+  pointer-events: none;
+  height: 0;
+}
+
+.editorContent :global(.ProseMirror ::selection) {
+  background: rgba(99, 102, 241, 0.25);
+}
