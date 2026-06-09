@@ -20,9 +20,9 @@ Replace the URLs above with your deployed environments.
 
 | Account | Email                                           | Password    | Role   |
 | ------- | ----------------------------------------------- | ----------- | ------ |
-| Alice   | [owner@docflow.dev](mailto:owner@docflow.dev)   | password123 | Owner  |
-| Bob     | [editor@docflow.dev](mailto:editor@docflow.dev) | password123 | Editor |
-| Carol   | [viewer@docflow.dev](mailto:viewer@docflow.dev) | password123 | Viewer |
+| Ramu    | [owner@docflow.dev](mailto:owner@docflow.dev)   | password123 | Owner  |
+| Srinu   | [editor@docflow.dev](mailto:editor@docflow.dev) | password123 | Editor |
+| Jaya    | [viewer@docflow.dev](mailto:viewer@docflow.dev) | password123 | Viewer |
 
 The seeded environment includes a sample document owned by Alice and shared with Bob as an editor.
 
