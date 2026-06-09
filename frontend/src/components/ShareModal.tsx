@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { sharingApi } from '../../lib/api';
-import type { AccessRecord } from '../../types';
+import { sharingApi } from '../lib/api';
+import type { AccessRecord } from '../types';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: CSS module type declarations may be missing in this project
 import styles from './ShareModal.module.css';
 
 interface Props {
