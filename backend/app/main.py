@@ -1,13 +1,22 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, documents, sharing, versions, upload
+
 from app.database import engine, Base
+from app.routers import auth, documents, sharing, versions, upload
+
+
+app = FastAPI(
+    title="DocFlow API",
+    version="1.0.0",
+)
+
 
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="DocFlow API", version="1.0.0")
 
 ALLOWED_ORIGINS = os.getenv(
     "ALLOWED_ORIGINS",
@@ -29,6 +38,6 @@ app.include_router(versions.router, prefix="/api/versions", tags=["versions"])
 app.include_router(upload.router, prefix="/api/upload", tags=["upload"])
 
 
-@app.get("/health")
+@app.get("/health", tags=["health"])
 def health():
     return {"status": "ok"}
