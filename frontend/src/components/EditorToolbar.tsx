@@ -1,6 +1,4 @@
 import type { Editor } from '@tiptap/react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: CSS module type declarations may be missing in this project
 import styles from './EditorToolbar.module.css';
 
 interface Props {

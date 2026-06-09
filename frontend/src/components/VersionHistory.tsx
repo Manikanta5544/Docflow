@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { versionsApi } from '../../lib/api';
-import type { DocumentVersion } from '../../types';
+import { versionsApi } from '../lib/api';
+import type { DocumentVersion } from '../types';
 import { formatDistanceToNow } from 'date-fns';
 import styles from './VersionHistory.module.css';
 
