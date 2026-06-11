@@ -8,9 +8,9 @@ DocFlow focuses on the core document collaboration workflow: creating documents,
 
 ## Live Demo
 
-**Frontend:** https://[docflow-git-main-manikanta5544s-projects.vercel.app](https://docflow-git-main-manikanta5544s-projects.vercel.app)
+**Frontend:** [docflow-git-main-manikanta5544s-projects.vercel.app](https://docflow-git-main-manikanta5544s-projects.vercel.app)
 
-**Backend API:** https://[https://docflow-s627.onrender.com](https://docflow-s627.onrender.com)
+**Backend API:** [https://docflow-s627.onrender.com](https://docflow-s627.onrender.com)
 
 Replace the URLs above with your deployed environments.
 
